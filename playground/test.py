@@ -1,9 +1,9 @@
 import sys 
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from swiftdeploy.settings import config
-config.BASE_DIR = Path(__file__).resolve().parent.parent
+config.BASE_DIR = Path(__file__).resolve().parent
 
 from swiftdeploy.model import MarkupModel
 
@@ -23,7 +23,8 @@ param_dict = {
     "married": "text",
     "educated": "true",
     'picture': 'image',
-    'cv':'file'
+    'cv':'file',
+    'wealthy':'text'
 }
 
 my_app = MarkupModel(model_info = "A dummy model you will really like", model_func = dummy, 

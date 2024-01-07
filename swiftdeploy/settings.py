@@ -84,7 +84,19 @@ form button {
 form button:hover {
     background-color: var(--secondary);
 }
+.form-group {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
 
+.form-group label {
+    width: 100px; /* Adjust as needed */
+}
+
+.form-group input {
+    flex-grow: 1;
+}
 
 footer{
     position: fixed;
@@ -102,6 +114,7 @@ footer{
     justify-content: center;
     display: flex;   
 }
+
 """
 
 config.CSS = css
