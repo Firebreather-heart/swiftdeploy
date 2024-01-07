@@ -64,3 +64,5 @@ if __name__ == "__main__":
 
 You can visit the webapp at http://localhost:5000 in your browser
 
+## Warnings
+You must set the BASE_DIR to a value right at the begining of your code, before importing any other module from swiftdeploy. This is because the BASE_DIR is used to locate the templates and static folders for the webapp. If you don't set the BASE_DIR, the webapp will not work.
