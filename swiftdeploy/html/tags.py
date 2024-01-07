@@ -1,4 +1,4 @@
-from html.htmlcontent import HtmlSkeleton
+from swiftdeploy.html.htmlcontent import HtmlSkeleton
 
 
 class Tag:
@@ -18,11 +18,11 @@ class Tag:
         
     def create(self):
         if self.body is None:
-            return f'<{self.name}  href="{self.href}" class="{self._class}" id = "{self.id}" {self.misclist}/>'
+            return f'<{self.name} href="{self.href}" class="{self._class}" id="{self.id}" {self.misclist}/>'
         elif self.body == 'empty':
-            return f'<{self.name} href="{self.href}" class="{self._class}" id = "{self.id}" {self.misclist}></{self.name}>'
+            return f'<{self.name} href="{self.href}" class="{self._class}" id="{self.id}" {self.misclist}></{self.name}>'
         else:
-            return f'<{self.name} href="{self.href}" class="{self._class}" id = "{self.id}" {self.misclist}>{self.body}</{self.name}>'
+            return f'<{self.name} href="{self.href}" class="{self._class}" id="{self.id}" {self.misclist}>{self.body}</{self.name}>'
     
     def __str__(self) -> str:
         return self.create()
@@ -37,12 +37,19 @@ class FormElement():
         self.class_ = kwargs.get('classname', '')
         self.input_type = kwargs.get('input_type', '')
         self.label = kwargs.get('label', '')
+        self.accept = kwargs.get('accept', '')  # New attribute for file types
     
     def make(self):
-        self.tag = f"""    <p>
-            <label for="{self.name}">{self.label}</label>
-            <input name="{self.name}"  class="{self.class_}" type = "{self.input_type}" id = "{self.id}"></input>    
-        </p>\n"""
+        if self.input_type == 'file' or self.input_type == 'image':
+            self.tag = f"""    <p>
+                <label for="{self.name}">{self.label}</label>
+                <input name="{self.name}"  class="{self.class_}" type="file" id="{self.id}" accept="{self.accept}"></input>    
+            </p>\n"""
+        else:
+            self.tag = f"""    <p>
+                <label for="{self.name}">{self.label}</label>
+                <input name="{self.name}"  class="{self.class_}" type="{self.input_type}" id="{self.id}"></input>    
+            </p>\n"""
         return self.tag
 
 
@@ -51,8 +58,8 @@ class Form(HtmlSkeleton):
         super().__init__()
     
     def set_(self):
-        self.add("""<input type="button" value="submit">""")
-        return self.wrap("form", enctype="multipart/form-data", method="POST")
+        self.add("""<button type="submit">Submit</button>""")
+        return self.wrap("form", enctype="multipart/form-data", method="post")
     
     def __str__(self) -> str:
         return super().__str__()

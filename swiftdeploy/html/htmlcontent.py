@@ -1,5 +1,5 @@
 import uuid 
-from html.config import BASE_DIR,HTML_FILE_PATH
+from .config import BASE_DIR,HTML_FILE_PATH
 from collections import OrderedDict
 
 class HtmlShell(object):
@@ -60,7 +60,7 @@ class HtmlShell(object):
         elif self.type == 'xml':
             self.all = "<html xmlns='http://www.w3.org/1999/xhtml'>"
         else:
-            raise ValueError(f"Unknown value '{type}' given for argument 'type', this argument receives either 'html' or 'xml' ") 
+            raise ValueError(f"Unknown value '{self.type}' given for argument 'type', this argument receives either 'html' or 'xml' ") 
         file_content = self.all 
         with open(filepath, 'w') as html:
             html.write(file_content)
@@ -89,7 +89,7 @@ class HtmlSkeleton(object):
         return self 
     
     def finalise(self):
-        self.barebones = "".join(i[1].obj for i in self.innards.items())
+        self.barebones = "".join(i[1].obj+"\n" for i in self.innards.items())
  
     def load_string(self, obj:str):
         str_obj = obj 
@@ -109,8 +109,8 @@ class HtmlSkeleton(object):
     def wrap(self, wrapper:str,**kwargs):
         sb = ''
         for key,item in kwargs.items():
-            sb += f""" {key} = "{item}" """
-        self.barebones = f"<{wrapper} {sb} > \n\t {self.barebones} \n\t </{wrapper}>"
+            sb += f"""{key}="{item}" """
+        self.barebones = f"<{wrapper} {sb}> \n\t {self.barebones} \n\t </{wrapper}>"
         return self.barebones
 
 

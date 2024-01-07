@@ -1,0 +1,3 @@
+1. The package should be able to auto generate the code for the entire web abb independent of the package 
+2. The package should have features to allow easy deployment to popular deployment platforms like pythonanywhere, heroku,e.t.c.
+3.
