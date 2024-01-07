@@ -4,10 +4,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from swiftdeploy.settings import config
 config.BASE_DIR = Path(__file__).resolve().parent
-
+config.APP_NAME = 'swiftdeploy'
+config.APP_HEADER = 'SwiftDeploy'
+config.APP_FOOTER = 'SwiftDeploy'
 from swiftdeploy.model import MarkupModel
-
-from pathlib import Path
 from swiftdeploy.app import webapp
 
 
@@ -27,9 +27,9 @@ param_dict = {
     'wealthy':'text'
 }
 
-my_app = MarkupModel(model_info = "A dummy model you will really like", model_func = dummy, 
+my_model = MarkupModel(model_info = "A dummy model you will really like", model_func = dummy, 
                   form_fields = param_dict)
-config.model = my_app
+config.model = my_model
 
 if __name__ == "__main__":
     webapp.run()
